@@ -1,0 +1,5 @@
+1.cnpm 是阿里的npm,npm命令执行失败时，可以切换到cnpm
+2.npm run build
+3.npm run dev
+4.npm init webpack projectName
+5.npm install
