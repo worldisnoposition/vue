@@ -1,26 +1,25 @@
 <template>
-    <div class="dashBoard">
-        <h1>{{msg}}</h1>
-    </div>
+  <div class="dash">
+    <h1>{{ msg }}</h1>
+    
+  </div>
 </template>
+
 <script>
 export default {
-    name:'DashBoardFile',
-    data(){
-        return {
-            msg:'DashBoardReturn result'
-        } 
+  name: 'DashBoard',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
     }
+  }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scopedApp>
-#app img {
-  width:30px;
-  height:30px;
-}
-#app{
+#app {
     width:30px;
-    margin-top: 10px;
+    height:30px;
 }
 </style>
-
