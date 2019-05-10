@@ -40,6 +40,7 @@ module.exports = {
   },
   module: {
     rules: [
+      // ...(config.dev.useEslint ? [createLintingRule()] : []),eslint语法太过严格，先不用了
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
