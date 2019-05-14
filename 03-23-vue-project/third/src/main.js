@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import CityCheckBox from './components/CityCheckBox'
+import EchartDemo from './components/EchartDemo'
+import echarts from 'echarts'
 
 Vue.config.productionTip = false
 
@@ -21,3 +23,12 @@ new Vue({
   components: { CityCheckBox },
   template: '<CityCheckBox/>'
 })
+
+Vue.prototype.$echarts = echarts
+new Vue({
+  el: '#myChart',
+  router,
+  components: { EchartDemo },
+  template: '<EchartDemo/>'
+})
+

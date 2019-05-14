@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import DashBoard from '@/components/DashBoardFile'
 import CityCheckBox from '@/components/CityCheckBox'
+import EchartDemo from '@/components/EchartDemo'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/city',
       name: 'CityCheckBox',
       component: CityCheckBox
+    },
+    {
+      path: '/echart',
+      name: 'hello',
+      component: EchartDemo
     }
   ]
 })
