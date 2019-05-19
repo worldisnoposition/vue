@@ -9,7 +9,7 @@
       </div>
       <input placeholder="请输入查询城市" v-model='cityName' @keyup.enter="addCity"/>
       <button value="add" @click="addCity">添加城市</button>
-      <button value="add" @click="resetCity">清空城市</button>
+      <button value="clear" @click="resetCity">清空城市</button>
       <br/>
       <div v-for='(city, index) in cities' :key="index">
         <li>{{city}}</li>
@@ -21,23 +21,30 @@
     </div>
 </template>
 <script>
+
+import bossCityList from '../assets/data/bossCityList.json'
+import zhipinCityList from '../assets/data/zhilianCityList.json'
+
+let bossCities = bossCityList
+let zhilianCities = zhipinCityList
+
 export default {
   name: 'CityCheckBox',
   data () {
     return {
       webSites: [
         {
-          id: '1',
+          id: 1,
           name: 'Boss直聘',
-          url: 'https://www.zhipin.com/job_detail'
+          url: 'https://www.zhipin.com/job_detail/'
         },
         {
-          id: '2',
+          id: 2,
           name: '智联招聘',
           url: 'https://sou.zhaopin.com'
         },
         {
-          id: '3',
+          id: 3,
           name: '100offer',
           url: 'https://cn.100offer.com/job_positions'
         }
@@ -52,7 +59,6 @@ export default {
   },
   methods: {
     checkedOne (webSiteId) {
-      console.log(3)
       let idIndex = this.webSiteIds.indexOf(webSiteId)
       if (idIndex >= 0) {
         // 如果已经包含了该id, 则去除(单选按钮由选中变为非选中状态)
@@ -63,7 +69,6 @@ export default {
       }
     },
     checkedAll () {
-      console.log(2)
       this.isWebSiteCheckedAll = !this.isWebSiteCheckedAll
       if (this.isWebSiteCheckedAll) {
         // 全选时
@@ -74,15 +79,33 @@ export default {
       } else {
         this.webSiteIds = []
       }
-      console.log(this.webSiteIds)
     },
     openWebPage () {
-      console.log(this.webSiteIds)
-      console.log(this.webSites)
       this.webSites.forEach(function (webSite) {
-        let url = webSite.url + '?cityNames=' + this.cities + '&jobName=' + this.jobName
-        console.log(url)
-        this.webSiteIds.indexOf(webSite.id) >= 0 ? window.open(url) : console.log('未选中' + webSite.name)
+        this.cities.forEach((item, index, array) => {
+          let url, cityId
+          switch (webSite.id) {
+            case 1:
+              cityId = bossCities[item]
+              url = webSite.url + '?query=' + this.jobName + '&city=' + cityId + '&industry=&position='
+              break
+            case 2:
+              cityId = zhilianCities[item]
+              url = webSite.url + '?jl=' + cityId + '&kw=' + this.jobName + '&kt=3&sf=0&st=0'
+              break
+            case 3:
+              url = webSite.url + '?jobName=' + this.jobName
+              break
+            default:
+              alert('数据异常')
+              console.error('数据异常' + webSite)
+              url = null
+          }
+          console.log(url)
+          if (url) {
+            this.webSiteIds.indexOf(webSite.id) >= 0 ? window.open(url) : console.log('未选中' + webSite.name)
+          }
+        })
       }, this)
     },
     addCity () {
