@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import DashBoard from '@/components/DashBoardFile'
 import CityCheckBox from '@/components/CityCheckBox'
 import EchartDemo from '@/components/EchartDemo'
+import WordCloud from '@/components/WordCloud'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/echart',
       name: 'hello',
       component: EchartDemo
+    },
+    {
+      path: '/wordCloud',
+      name: 'wordCloud',
+      component: WordCloud
     }
   ]
 })

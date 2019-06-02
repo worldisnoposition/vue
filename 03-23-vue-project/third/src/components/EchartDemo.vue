@@ -1,9 +1,12 @@
 <template>
-  <div id='myChart' :style="{width: '300px', height: '300px'}"></div>
+  <div id='myChart' :style="{width: '600px', height: '400px'}"></div>
 </template>
 
 <script>
-
+import Vue from 'vue'
+import VueAxios from 'vue-axios'
+import axios from 'axios'
+Vue.use(VueAxios, axios)
 export default {
   name: 'hello',
   data () {
@@ -13,24 +16,43 @@ export default {
   },
   mounted () {
     console.log('hello')
-    this.drawLine()
+    Vue.axios.post('http://localhost:8080/echart/statistic', {params: {'fdsa': 'asdf'}})
+      .then((res) => {
+        this.drawLine(res.data)
+      })
   },
   methods: {
-    drawLine () {
+    drawLine (data) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById('myChart'))
       // 绘制图表
+      console.log(data)
+      console.log(data.companyNames)
+      console.log(data.jobNumbers)
       myChart.setOption({
         title: { text: '在Vue中使用echarts' },
-        tooltip: {},
-        xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        tooltip: {
+          trigger: 'axis'
         },
+        grid: {
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: true,
+            data: data.companyNames,
+            axisLabel: {
+              show: true,
+              rotate: -15,
+              interval: 0
+            }
+          }
+        ],
         yAxis: {},
         series: [{
           name: '销量',
           type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
+          data: data.jobNumbers
         }]
       })
     }

@@ -5,6 +5,7 @@ import Vue from 'vue'
 import router from './router'
 import CityCheckBox from './components/CityCheckBox'
 import EchartDemo from './components/EchartDemo'
+import WordCloud from './components/WordCloud'
 import echarts from 'echarts'
 
 Vue.config.productionTip = false
@@ -30,4 +31,10 @@ new Vue({
   router,
   components: { EchartDemo },
   template: '<EchartDemo/>'
+})
+new Vue({
+  el: '#wordCloud',
+  router,
+  components: { WordCloud },
+  template: '<WordCloud/>'
 })
